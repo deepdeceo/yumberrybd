@@ -14,9 +14,16 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->enum('role', ['user', 'partner', 'rider'])->default('user');
+            $table->boolean('is_premium')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->timestamp('last_login_at')->nullable(); // track last login
+            $table->string('referral_code')->nullable()->unique(); // user's own referral code
+            $table->foreignId('referred_by')->nullable()->constrained('users');
+            $table->boolean('isPhoneVerify')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

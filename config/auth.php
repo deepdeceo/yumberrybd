@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        // আপনার অ্যাডমিন প্যানেলের জন্য (adminpanel টেবিল)
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -69,6 +74,11 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        // আপনার কাস্টম অ্যাডমিন টেবিলের জন্য প্রোভাইডার
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AdminPanel::class, // আপনার তৈরি করা মডেল
+        ],
     ],
 
     /*
