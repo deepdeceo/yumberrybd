@@ -38,31 +38,75 @@ class CitiesForm
                             ->onColor('success'),
                     ]),
 
-                // ডান পাশে ম্যাপ এরিয়া সিলেকশন
-                Section::make('City Boundary (Map)')
-                    ->columnSpan(1) // সেকশনটিকে পুরো উইডথ দিতে এটি নিশ্চিত করুন
-                    ->schema([
-                        Map::make('location')
-                            ->label('Select Area Boundary')
-                            ->columnSpanFull()
-                            ->defaultLocation(23.8103, 90.4125)
-                            ->showMarker(false)
-                            ->geoMan(true)
-                            ->geoManEditable(true)
-                            ->drawPolygon(true)
-                            ->editPolygon(true)
-                            ->deleteLayer(true)
-                            ->setColor('#ff5722')
-                            ->setFilledColor('#ff5722')
-                            ->extraAttributes([
-                                'style' => 'height: 500px;',
-                            ])
-                            ->extraControl([
-                                'zoomControl' => true,
-                                'fullscreenControl' => true,
-                            ])
-                    ]),
 
+                Map::make('location')
+                    ->label('Select Area Boundary')
+                    ->columnSpanFull()
+                    ->defaultLocation(23.8103, 90.4125)
+                    ->showMarker(false)
+                    ->geoMan(true)
+                    ->geoManEditable(true)
+                    ->drawPolygon(true)
+                    ->editPolygon(true)
+                    ->deleteLayer(true)
+                    ->setColor('#ff5722')
+                    ->setFilledColor('#ff5722')
+                    ->extraAttributes([
+                        'style' => 'height: 500px;',
+                    ])
+                    ->extraControl([
+                        'zoomControl' => true,
+                        'fullscreenControl' => true,
+                    ])
+                    ->dehydrateStateUsing(function ($state) {
+                        if (empty($state)) {
+                            return null;
+                        }
+
+                        // If single point, create a small polygon around it
+                        if (is_array($state) && isset($state['lat'], $state['lng'])) {
+                            $lat = (float)$state['lat'];
+                            $lng = (float)$state['lng'];
+                            $offset = 0.005; // Small offset for polygon
+
+                            $coordinates = [
+                                [$lng - $offset, $lat - $offset],
+                                [$lng + $offset, $lat - $offset],
+                                [$lng + $offset, $lat + $offset],
+                                [$lng - $offset, $lat + $offset],
+                                [$lng - $offset, $lat - $offset], // Close the polygon
+                            ];
+
+                            return [
+                                'type' => 'Polygon',
+                                'coordinates' => [$coordinates],
+                            ];
+                        }
+
+                        // If array of points, process as polygon
+                        if (is_array($state)) {
+                            $coordinates = [];
+
+                            foreach ($state as $point) {
+                                if (is_array($point) && isset($point['lat'], $point['lng'])) {
+                                    $coordinates[] = [(float)$point['lng'], (float)$point['lat']];
+                                } elseif (is_array($point) && count($point) === 2) {
+                                    $coordinates[] = [(float)$point[1], (float)$point[0]];
+                                }
+                            }
+
+                            if (empty($coordinates)) {
+                                return null;
+                            }
+
+                            return [
+                                'type' => 'Polygon',
+                                'coordinates' => [$coordinates],
+                            ];
+                        }
+
+                        return null;
+                    }),
             ]);
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\AdminPanel;
 use App\Models\Business\Cities;
+use App\Models\Business\Zones;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -50,6 +52,18 @@ class UserStatsOverview extends BaseWidget
             Stat::make('Cities', Cities::count())
                 ->description('Services Areas')
                 ->color('danger')
+                ->columnSpan(1)
+                ->chart([2, 10, 5, 12, 8, 15, 20]),
+
+            Stat::make('Zones', Zones::count())
+                ->description('Our Zones')
+                ->color('primary')
+                ->columnSpan(1)
+                ->chart([2, 10, 5, 12, 8, 15, 20]),
+
+            Stat::make('AdminPanels', AdminPanel::count())
+                ->description('Total Staff')
+                ->color('gray')
                 ->columnSpan(1)
                 ->chart([2, 10, 5, 12, 8, 15, 20]),
         ];

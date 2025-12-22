@@ -15,6 +15,7 @@ class ZonesTable
 {
     public static function configure(Table $table): Table
     {
+        
         return $table
             ->columns([
                 TextColumn::make('city.name')

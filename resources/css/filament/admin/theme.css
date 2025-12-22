@@ -25,19 +25,18 @@
     /* Position it 10px away from the sidebar */
     inset-inline-start: calc(var(--sidebar-width) + 10px) !important;
 
-
-    height: 48px !important;
-    min-height: 48px !important;
+    height: 65px !important;
+    min-height: 65px !important;
     padding-block: 0 !important;
 }
 
-/* Body Background */
+
 .fi-body {
+    padding-top: 0 !important; /* default may be ~2rem */
+    margin-top: 0 !important;
     background-color: #e7f0f8;
 }
 
-/* Layout container fix */
-.fi-main {
-    /* Ensure the main content doesn't hide behind the floating topbar */
-    padding-top: 10px;
+.filament-main {
+    padding-top: 0 !important;
 }

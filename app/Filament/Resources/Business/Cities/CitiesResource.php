@@ -20,7 +20,7 @@ class CitiesResource extends Resource
 {
     protected static ?string $model = Cities::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::AdjustmentsVertical;
 
     protected static string|UnitEnum|null $navigationGroup = 'Business';
 

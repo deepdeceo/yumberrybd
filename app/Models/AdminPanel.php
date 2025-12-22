@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\UserManagement\AdminSalary;
+use App\Models\UserManagement\AreaManager;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -44,5 +46,15 @@ class AdminPanel extends Authenticatable implements FilamentUser
         // এখানে আপনি চাইলে নির্দিষ্ট কোনো রোলকে ব্লক করতে পারেন
         // বর্তমানে সবাই এক্সেস পাবে যারা এই টেবিলে আছে
         return true;
+    }
+    public function salary()
+    {
+        return $this->hasOne(AdminSalary::class, 'user_id');
+    }
+
+
+    public function areaManager()
+    {
+        return $this->hasOne(AreaManager::class, 'user_id');
     }
 }

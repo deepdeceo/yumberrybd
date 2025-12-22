@@ -19,7 +19,7 @@ class ZonesResource extends Resource
 {
     protected static ?string $model = Zones::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Cog;
     protected static string|UnitEnum|null $navigationGroup = 'Business';
 
     public static function form(Schema $schema): Schema
