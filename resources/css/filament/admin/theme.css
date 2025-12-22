@@ -1,0 +1,43 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+/* Sidebar adjustments */
+.fi-sidebar {
+    --sidebar-width: 250px;
+    --sidebar-collapsed-width: 64px;
+    background-color: white;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.08);
+
+    /* Ensure sidebar takes full height or adjust as needed */
+    height: 100vh !important;
+}
+.fi-sidebar-nav-groups {
+    padding-top: 0px !important;    /* ওপরের গ্যাপ কমানোর জন্য */
+    padding-bottom: 0px !important; /* নিচের গ্যাপ কমানোর জন্য */
+    padding-inline: 8px !important; /* ডানে-বামে গ্যাপ অ্যাডজাস্ট করার জন্য */
+    gap: 4px !important;            /* মেনু গ্রুপগুলোর নিজেদের মধ্যকার গ্যাপ কমানোর জন্য */
+}
+/* Topbar adjustments */
+.fi-topbar {
+    background-color: white;
+
+    /* Position it 10px away from the sidebar */
+    inset-inline-start: calc(var(--sidebar-width) + 10px) !important;
+
+
+    height: 48px !important;
+    min-height: 48px !important;
+    padding-block: 0 !important;
+}
+
+/* Body Background */
+.fi-body {
+    background-color: #e7f0f8;
+}
+
+/* Layout container fix */
+.fi-main {
+    /* Ensure the main content doesn't hide behind the floating topbar */
+    padding-top: 10px;
+}

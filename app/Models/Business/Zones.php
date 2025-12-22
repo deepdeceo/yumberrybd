@@ -12,12 +12,12 @@ class Zones extends Model
     protected $fillable = [
         'city_id',
         'name',
-        'boundary', // polygon coordinates
+        'location', // polygon coordinates
         'is_active',
     ];
 
     protected $casts = [
-        'boundary' => 'array', // Automatically cast JSON to array
+        'location' => 'array', // Automatically cast JSON to array
         'is_active' => 'boolean',
     ];
 

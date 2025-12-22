@@ -15,7 +15,7 @@ class UserStatsOverview extends BaseWidget
 
     protected function getColumns(): int | array
     {
-        return 3; // 4 stats inline
+        return 4; // 4 stats inline
     }
 
     public static function canView(): bool
