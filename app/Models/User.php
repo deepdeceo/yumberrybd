@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -61,5 +63,18 @@ class User extends Authenticatable
     public function referrals()
     {
         return $this->hasMany(User::class, 'referred_by');
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($panel->getId() === 'admin') {
+            return $this->role === 'admin';
+        }
+
+        if ($panel->getId() === 'partner') {
+            return $this->role === 'partner';
+        }
+
+        return true;
     }
 }

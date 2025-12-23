@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['shop', 'resturant', 'pharmacy', 'grocery']);
+            $table->enum('type', ['shop', 'restaurant', 'pharmacy', 'grocery']);
             $table->foreignId('cities')->constrained('cities')->onDelete('cascade');
             $table->foreignId('zones_id')->constrained('zones')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');

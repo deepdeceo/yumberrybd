@@ -1,18 +1,17 @@
 <?php
 
-
-namespace App\Models\VendorManagement;
+namespace App\Models\UserManagement;
 
 use App\Models\Business\Cities;
 use App\Models\Business\Zones;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Business extends Model
+class Partner extends Model
 {
-    use HasFactory;
+     use HasFactory;
 
     protected $fillable = [
         'type',
@@ -36,6 +35,7 @@ class Business extends Model
         'last_online_at',
         'avg_preparation_time',
         'is_verified',
+        'business_address'
     ];
 
     /**

@@ -9,3 +9,46 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+
+@layer components {
+
+    /* Application mobile size view */
+    .application {
+        @apply max-w-[480px] min-h-screen mx-auto relative
+    }
+
+    .bg-brand {
+        @apply bg-[#FF6B35]
+    }
+
+    .bg-brand-s {
+        @apply hover:bg-[#cf562a]
+    }
+
+    .bg-navy {
+        @apply bg-[#1D3557]
+    }
+
+    .bg-partner {
+        @apply bg-[#1D3557]
+    }
+
+}
+
+
+.brand-text-navy {
+    color: #1D3557;
+}
+
+.brand-text {
+    color: #FF6B35;
+}
+
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
