@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\PartnerRegister;
 use App\Filament\Partner\Pages\Business;
+use App\Filament\Partner\Pages\SetupBank;
 use App\Filament\Partner\Widgets\Setupwidgets;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -46,6 +47,7 @@ class PartnerPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
                 Business::class,
+                SetupBank::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Partner/Widgets'), for: 'App\Filament\Partner\Widgets')
             ->widgets([
