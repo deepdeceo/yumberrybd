@@ -41,4 +41,24 @@ class Categories extends Model
     {
         return $this->children()->with('childrenRecursive');
     }
+
+    /**
+     * Get all descendant IDs recursively.
+     */
+    public function getAllDescendantIds()
+    {
+        $ids = [];
+        $this->collectDescendants($this->childrenRecursive, $ids);
+        return $ids;
+    }
+
+    private function collectDescendants($children, &$ids)
+    {
+        foreach ($children as $child) {
+            $ids[] = $child->id;
+            if ($child->relationLoaded('childrenRecursive') && $child->childrenRecursive->isNotEmpty()) {
+                $this->collectDescendants($child->childrenRecursive, $ids);
+            }
+        }
+    }
 }

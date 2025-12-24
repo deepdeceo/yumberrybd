@@ -24,16 +24,17 @@
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 max-w-6xl mx-auto">
 
             <!-- Category Item Component (Alpine loop for cleaner code) -->
-            <template
+            <template x-if="category.slug !== 'restaurant'"
                 x-for="category in [
-                    { name: 'Grocery', icon: 'https://cdn-icons-png.flaticon.com/128/3081/3081840.png', subtitle: 'Over 14+ Stores' },
-                    { name: 'Pharmacy', icon: 'https://cdn-icons-png.flaticon.com/128/3028/3028549.png', subtitle: 'Over 14+ Stores' },
-                    { name: 'Shop', icon: 'https://cdn-icons-png.flaticon.com/128/3081/3081905.png', subtitle: 'Over 53+ Items' },
-                    { name: 'Food', icon: 'https://cdn-icons-png.flaticon.com/128/2276/2276931.png', subtitle: 'Over 13+ Restaurants' },
+                    { name: 'Grocery', slug: 'grocery', icon: 'https://cdn-icons-png.flaticon.com/128/3081/3081840.png', subtitle: 'Over 14+ Stores' },
+                    { name: 'Pharmacy',  slug: 'pharmacy', icon: 'https://cdn-icons-png.flaticon.com/128/3028/3028549.png', subtitle: 'Over 14+ Stores' },
+                    { name: 'Shop',  slug: 'shop', icon: 'https://cdn-icons-png.flaticon.com/128/3081/3081905.png', subtitle: 'Over 53+ Items' },
+                    { name: 'Food',  slug: 'restaurant', icon: 'https://cdn-icons-png.flaticon.com/128/2276/2276931.png', subtitle: 'Over 13+ Restaurants' },
                     { name: 'Parcel', icon: 'https://cdn-icons-png.flaticon.com/128/2329/2329035.png', subtitle: 'Instant Delivery' },
                     { name: 'Rental', icon: 'https://cdn-icons-png.flaticon.com/128/1048/1048313.png', subtitle: 'Over 7+ Providers' }
                 ]">
-                <div class="bg-white group cursor-pointer p-6 rounded-lg shadow-soft border border-transparent hover:border-green-200 transition-all duration-300 text-left relative flex flex-col items-start gap-3 hover:-translate-y-1"
+                <a :href="'/' + category.slug" @click.prevent="Livewire.navigate('/' + category.slug)"
+                    class="bg-white group cursor-pointer p-6 rounded-lg shadow-soft border border-transparent hover:border-green-200 transition-all duration-300 text-left relative flex flex-col items-start gap-3 hover:-translate-y-1"
                     :class="darkMode ? 'bg-slate-700 border-slate-600' : ''">
 
                     <!-- Icon Placeholder (In image these are colorful icons) -->
@@ -53,9 +54,36 @@
                         class="absolute top-6 right-6 text-custom-green opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
                         <i class="fas fa-arrow-right text-sm"></i>
                     </div>
-                </div>
+                </a>
             </template>
+            <!-- Food / restaurant category -->
+            <template x-if="category.slug === 'restaurant'">
+                <button
+                    @click="
+            // Local test coordinates (inside polygon)
+            const lat = 24.384625777615966;
+            const lng = 88.62722396850588;
+            Livewire.navigate(`/restaurant?lat=${lat}&lng=${lng}`)
+        "
+                    class="bg-white group cursor-pointer p-6 rounded-lg shadow-soft border border-transparent hover:border-green-200 transition-all duration-300 text-left relative flex flex-col items-start gap-3 hover:-translate-y-1 w-full text-left"
+                    :class="darkMode ? 'bg-slate-700 border-slate-600' : ''">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img :src="category.icon" class="w-10 h-10 object-contain" :alt="category.name">
+                    </div>
 
+                    <div>
+                        <h3 class="font-bold text-gray-900 group-hover:text-custom-green transition-colors"
+                            :class="darkMode ? 'text-white' : ''" x-text="category.name"></h3>
+                        <p class="text-[10px] text-gray-400 font-medium tracking-wide uppercase mt-1"
+                            x-text="category.subtitle"></p>
+                    </div>
+
+                    <div
+                        class="absolute top-6 right-6 text-custom-green opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
+                        <i class="fas fa-arrow-right text-sm"></i>
+                    </div>
+                </button>
+            </template>
 
         </div>
     </div>

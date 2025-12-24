@@ -2,12 +2,7 @@
 <html lang="en" x-data="{ darkMode: false, langOpen: false, categoryOpen: false }">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>6amMart - Everyday Needs Delivered Fast</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <x-head :title="$title ?? null" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
@@ -41,6 +36,7 @@
             background-color: #1a202c;
         }
     </style>
+
 </head>
 
 <body class="bg-gray-50 text-gray-800 transition-colors duration-300" :class="darkMode ? 'bg-slate-900 text-white' : ''">
@@ -167,7 +163,7 @@
                 <!-- Menu Links -->
                 <div class="hidden lg:flex items-center gap-8 font-medium"
                     :class="darkMode ? 'text-gray-200' : 'text-gray-700'">
-                    <a href="#" class="text-custom-green border-b-2 border-custom-green pb-1">Home</a>
+                    <a href="{{route('home')}}" wire:navigate class="text-custom-green border-b-2 border-custom-green pb-1">Home</a>
                     <div class="relative group">
                         <button class="hover:text-custom-green flex items-center gap-1">
                             Categories <i class="fas fa-chevron-down text-[10px]"></i>
@@ -224,11 +220,11 @@
             class="max-w-[1400px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-gray-800 pb-16">
             <!-- Brand & App Links -->
             <div class="space-y-8">
-                <a href="#" class="flex items-center gap-2">
+                <a href="{{route('home')}}" class="flex items-center gap-2">
                     <div class="bg-custom-green w-10 h-10 rounded-xl flex items-center justify-center">
                         <i class="fas fa-shopping-basket text-white text-xl"></i>
                     </div>
-                    <span class="text-2xl font-black tracking-tighter uppercase">6amMart</span>
+                    <span class="text-2xl font-black tracking-tighter uppercase">Yumberry</span>
                 </a>
                 <div class="space-y-4">
                     <h5 class="text-sm font-bold uppercase tracking-widest text-gray-500">Download our app</h5>
@@ -326,6 +322,8 @@
             </div>
         </div>
     </footer>
+    @livewireScripts
+
 </body>
 
 </html>

@@ -48,6 +48,7 @@ class ProductForm
 
                         FileUpload::make('thumbnail')
                             ->label('Feature Image')
+                            ->disk('public')
                             ->image()
                             ->directory('products/thumbnails')
                             ->imageEditor() // v4 features
