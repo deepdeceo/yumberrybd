@@ -45,6 +45,11 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        // এটি যোগ করুন
+        'partner' => [
+            'driver' => 'session',
+            'provider' => 'users', // যদি পার্টনাররাও User টেবিল ব্যবহার করে
+        ],
     ],
 
     /*

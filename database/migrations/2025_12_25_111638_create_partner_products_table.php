@@ -38,6 +38,10 @@ return new class extends Migration
             $table->boolean('is_featured')->default(false);
             $table->integer('views')->default(0); // Product popularity track korar jonno
 
+              // Pricing
+            $table->decimal('buying_price', 10, 2)->default(0.00);
+            $table->decimal('selling_price', 10, 2)->default(0.00);
+
             $table->timestamps();
         });
     }

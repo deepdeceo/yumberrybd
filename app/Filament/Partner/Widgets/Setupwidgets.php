@@ -5,6 +5,7 @@ namespace App\Filament\Partner\Widgets;
 use Filament\Widgets\Widget;
 use App\Models\UserManagement\Partner; // আপনার পার্টনার মডেলটি ইমপোর্ট করুন
 use App\Models\Wallet\PartnerPaymentMethod;
+use App\Models\Warehouse\PartnerProduct;
 use Illuminate\Support\Facades\Auth;
 
 class Setupwidgets extends Widget
@@ -50,14 +51,19 @@ class Setupwidgets extends Widget
                 ];
             }
 
-            // ৩. অন্যান্য কার্ড (যেমন: Add Products) সবসময় দেখাতে পারেন অথবা আপনার লজিক অনুযায়ী
-            $cards[] = [
-                'title' => 'Add Products',
-                'desc' => 'আপনার প্রথম প্রোডাক্টটি আজকেই লিস্ট করুন।',
-                'icon' => 'heroicon-o-plus-circle',
-                'button_text' => 'Add Now',
-                'link' => '/partner/products/create',
-            ];
+            $getProduct = PartnerProduct::where('user_id', $user->id)
+                ->where('partner_id', $partner->id)
+                ->exists();
+
+            if (!$getProduct) {
+                $cards[] = [
+                    'title' => 'Add Products',
+                    'desc' => 'আপনার প্রথম প্রোডাক্টটি আজকেই লিস্ট করুন।',
+                    'icon' => 'heroicon-o-plus-circle',
+                    'button_text' => 'Add Now',
+                    'link' => '/partner/products/create',
+                ];
+            }
         }
 
         return $cards;

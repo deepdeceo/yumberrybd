@@ -53,7 +53,7 @@
                         <div class="text-[10px] uppercase text-white/80">Positive Review</div>
                     </div>
                     <div>
-                        <div class="text-xl font-bold">{{ $estimatedTime  }}  min</div>
+                        <div class="text-xl font-bold">{{ $estimatedTime }} min</div>
                         <div class="text-[10px] uppercase text-white/80">Delivery Time</div>
                     </div>
                 </div>
@@ -111,85 +111,131 @@
 
 
     <div class="bg-gray-50 min-h-screen p-4 md:p-8 font-sans antialiased" x-data="{ search: '', showFilter: false }">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-        <h2 class="text-xl font-bold text-gray-800">All Products (14)</h2>
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <h2 class="text-xl font-bold text-gray-800">All Products (14)</h2>
 
-        <div class="flex flex-wrap items-center gap-6">
-            <div class="flex gap-4">
-                <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-gray-600">
-                    <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-green-600 focus:ring-green-500"> Veg
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-gray-600">
-                    <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-green-600 focus:ring-green-500"> Non-Veg
-                </label>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <div class="relative">
-                    <span class="absolute inset-y-0 left-3 flex items-center text-gray-400">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    </span>
-                    <input type="text" placeholder="Search for items..." class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 w-64 bg-white shadow-sm text-sm">
+            <div class="flex flex-wrap items-center gap-6">
+                <div class="flex gap-4">
+                    <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-gray-600">
+                        <input type="checkbox" wire:model.live="foodType" value="Veg"
+                            class="w-4 h-4 rounded border-gray-300 text-green-600 focus:ring-green-500"> Veg
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-gray-600">
+                        <input type="checkbox" wire:model.live="foodType" value="Non-Veg"
+                            class="w-4 h-4 rounded border-gray-300 text-green-600 focus:ring-green-500"> Non-Veg
+                    </label>
                 </div>
-                <button class="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg bg-white text-gray-600 text-sm hover:bg-gray-50 shadow-sm">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
-                    Filter
-                </button>
+
+                <div class="flex items-center gap-2">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </span>
+                        <input type="text" placeholder="Search for items..." wire:model.live="search"
+                            class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 w-64 bg-white shadow-sm text-sm">
+                    </div>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg bg-white text-gray-600 text-sm hover:bg-gray-50 shadow-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
+                            </path>
+                        </svg>
+                        Filter
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
-        <aside class="w-full md:w-64 space-y-8">
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h3 class="font-bold text-gray-800 mb-4">Categories</h3>
-                <div class="space-y-3">
-                    <template x-for="cat in ['Thai', 'Noodles', 'Indian', 'Biriyani']">
-                        <label class="flex items-center gap-3 cursor-pointer group">
-                            <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-green-600 focus:ring-green-500">
-                            <span class="text-sm text-gray-600 group-hover:text-gray-900" x-text="cat"></span>
-                        </label>
-                    </template>
-                </div>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h3 class="font-bold text-gray-800 mb-4">Price Range</h3>
-                <input type="range" min="0" max="1000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600">
-                <div class="flex justify-between mt-2 text-xs text-gray-400">
-                    <span>$0</span>
-                    <span>$1000</span>
-                </div>
-            </div>
-        </aside>
-
-        <main class="flex-1">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <template x-for="i in [1, 2, 3, 4]" :key="i">
-                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 relative group cursor-pointer">
-                        <div class="absolute top-3 left-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10">
-                            5%
-                        </div>
-
-                        <div class="h-48 overflow-hidden bg-gray-100">
-                            <img src="https://img.freepik.com/free-photo/gourmet-spicy-thai-basil-chicken-with-rice-fried-egg_23-2148762744.jpg"
-                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                        </div>
-
-                        <div class="p-4 text-center">
-                            <p class="text-[10px] text-gray-400 font-medium uppercase tracking-wider mb-1">Café Monarch</p>
-                            <h4 class="font-bold text-gray-800 mb-1 line-clamp-1">Spicy Thai Basil Chicken</h4>
-                            <p class="text-xs text-gray-400 mb-3 font-medium">Kg</p>
-
-                            <div class="flex items-center justify-center gap-2">
-                                <span class="text-xs text-gray-400 line-through">$250.00</span>
-                                <span class="text-lg font-bold text-green-600">$237.50</span>
-                            </div>
-                        </div>
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
+            <aside class="w-full md:w-64 space-y-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h3 class="font-bold text-gray-800 mb-4">Categories</h3>
+                    <div class="space-y-3">
+                        @foreach ($ctg as $category)
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" wire:model.live="selectedCategories" value="{{ $category->id }}"
+                                    class="w-4 h-4 rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="text-sm text-gray-600 group-hover:text-gray-900">{{ $category->name }}</span>
+                            </label>
+                        @endforeach
                     </div>
-                </template>
-            </div>
-        </main>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h3 class="font-bold text-gray-800 mb-4">Price Range</h3>
+                    <input type="range" min="0" max="5000" wire:model.live="maxPrice"
+                        class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600">
+                    <div class="flex justify-between mt-2 text-xs text-gray-400">
+                        <span>BDT 0</span>
+                        <span>BDT {{ $maxPrice }}</span>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="flex-1">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+
+                    @foreach ($product as $show)
+                        <div
+                            class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 relative group cursor-pointer">
+                            <div
+                                class="absolute top-3 left-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10">
+                                5%
+                            </div>
+
+                            <div class="h-48 overflow-hidden bg-gray-100">
+
+                                @if ($show->thumbnail)
+                                    <img src="{{ asset('storage/' . $show->thumbnail) }}"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                @else
+                                    <img src="https://via.placeholder.com/150" alt="No Image"
+                                        class="h-32 object-contain opacity-50">
+                                @endif
+                            </div>
+
+                            <div class="p-4 text-center">
+                                <p class="text-[10px] text-gray-400 font-medium uppercase tracking-wider mb-1">
+                                    {{ $show->category->name ?? 'No Category' }}</p>
+                                <h4 class="font-bold text-gray-800 mb-1 line-clamp-1"> {{ $show->title }}</h4>
+
+                                <div class="flex items-center justify-center gap-2">
+                                    @php
+                                        $originalPrice = $show->selling_price;
+                                        $discountAmount = $show->discount_amount ?? 0;
+                                        $finalPrice = $originalPrice;
+
+                                        if ($discountAmount > 0) {
+                                            if ($show->discount_type === 'percent') {
+                                                $finalPrice = $originalPrice - $originalPrice * ($discountAmount / 100);
+                                            } else {
+                                                $finalPrice = $originalPrice - $discountAmount;
+                                            }
+                                        }
+                                    @endphp
+
+                                    {{-- যদি ডিসকাউন্ট থাকে তবেই আগের প্রাইসটি (Old Price) কাটা অবস্থায় দেখাবে --}}
+                                    @if ($discountAmount > 0)
+                                        <span class="text-xs text-gray-400 line-through">
+                                            BDT {{ number_format($originalPrice, 2) }}
+                                        </span>
+                                    @endif
+
+                                    <span class="text-lg font-bold text-green-600">
+                                        BDT {{ number_format($finalPrice, 2) }}
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    @endforeach
+                </div>
+            </main>
+        </div>
     </div>
-</div>
 </div>

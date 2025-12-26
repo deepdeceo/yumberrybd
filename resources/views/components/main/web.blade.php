@@ -2,7 +2,7 @@
 <html lang="en" x-data="{ darkMode: false, langOpen: false, categoryOpen: false }">
 
 <head>
-  <x-head :title="$title ?? null" />
+    <x-head :title="$title ?? null" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
@@ -163,7 +163,8 @@
                 <!-- Menu Links -->
                 <div class="hidden lg:flex items-center gap-8 font-medium"
                     :class="darkMode ? 'text-gray-200' : 'text-gray-700'">
-                    <a href="{{route('home')}}" wire:navigate class="text-custom-green border-b-2 border-custom-green pb-1">Home</a>
+                    <a href="{{ route('home') }}" wire:navigate
+                        class="text-custom-green border-b-2 border-custom-green pb-1">Home</a>
                     <div class="relative group">
                         <button class="hover:text-custom-green flex items-center gap-1">
                             Categories <i class="fas fa-chevron-down text-[10px]"></i>
@@ -191,11 +192,21 @@
                     <span
                         class="absolute top-1 right-1 bg-custom-green text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center border-2 border-white">0</span>
                 </div>
-                <button
-                    class="bg-custom-green hover:bg-green-700 text-white px-5 sm:px-7 py-2.5 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-green-200/50 transition-all active:scale-95">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <span class="hidden sm:inline">Sign In</span>
-                </button>
+                @auth
+                    <a href="{{ url('/dashboard') }}" wire:navigate
+                        class="bg-custom-green hover:bg-green-700 text-white px-5 sm:px-7 py-2.5 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-green-200/50 transition-all active:scale-95">
+                        <i class="fas fa-th-large"></i>
+                        <span class="hidden sm:inline">Dashboard</span>
+                    </a>
+                @endauth
+
+                @guest
+                    <a href="{{ route('login') }}"
+                        class="bg-custom-green hover:bg-green-700 text-white px-5 sm:px-7 py-2.5 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-green-200/50 transition-all active:scale-95">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span class="hidden sm:inline">Sign In</span>
+                    </a>
+                @endguest
             </div>
         </div>
     </nav>
@@ -220,7 +231,7 @@
             class="max-w-[1400px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-gray-800 pb-16">
             <!-- Brand & App Links -->
             <div class="space-y-8">
-                <a href="{{route('home')}}" class="flex items-center gap-2">
+                <a href="{{ route('home') }}" class="flex items-center gap-2">
                     <div class="bg-custom-green w-10 h-10 rounded-xl flex items-center justify-center">
                         <i class="fas fa-shopping-basket text-white text-xl"></i>
                     </div>

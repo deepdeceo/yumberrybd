@@ -4,6 +4,7 @@ namespace App\Livewire\Frontend\Web;
 
 use App\Models\Business\Categories;
 use App\Models\UserManagement\Partner;
+use App\Models\Warehouse\PartnerProduct;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -15,6 +16,13 @@ class SingleRestaurant extends Component
     public $distance; // km
     public $estimatedTime;
     public $ctg;
+    public $product;
+
+    public $search = '';
+    public $selectedCategories = [];
+    public $minPrice = 0;
+    public $maxPrice = 5000;
+    public $foodType = []; // Veg/Non-Veg
 
     public function mount($id)
     {
@@ -39,6 +47,8 @@ class SingleRestaurant extends Component
 
         $this->ctg = Categories::where('type', 'resturent')->get();
 
+
+        $this->product = PartnerProduct::where('partner_id', $this->partner->id)->get();
     }
 
     private function calculateDistance($lat1, $lon1, $lat2, $lon2): float
@@ -60,6 +70,24 @@ class SingleRestaurant extends Component
 
     public function render()
     {
+        $query = PartnerProduct::where('partner_id', $this->partner->id);
+
+        if ($this->search) {
+            $query->where('title', 'like', '%' . $this->search . '%');
+        }
+
+        if (!empty($this->selectedCategories)) {
+            $query->whereIn('category_id', $this->selectedCategories);
+        }
+
+        if (!empty($this->foodType)) {
+            $query->whereIn('food_type', $this->foodType);
+        }
+
+        $query->whereBetween('selling_price', [$this->minPrice, $this->maxPrice]);
+
+        $this->product = $query->get();
+
         return view('livewire.frontend.web.single-restaurant');
     }
 }

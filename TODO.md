@@ -1,16 +1,15 @@
-# Map Section Fix for Partner Business Page
+# TODO List for Creating Login Code and User Authentication
 
 ## Completed Tasks
-- [x] Fixed mount method to properly fill latitude, longitude, and location fields
-- [x] Updated Map field to use correct defaultLocation with latitude and longitude parameters
-- [x] Added afterStateUpdated callback to sync latitude and longitude when map marker is moved
-- [x] Added validation rules for latitude (-90 to 90) and longitude (-180 to 180)
-- [x] Updated save method to include latitude and longitude in database update
+- [x] Create UserAuthService class with createUser and authenticateUser methods.
+- [x] Update CreateUser component to use UserAuthService for account creation with email or phone.
+- [x] Create Login component with authentication logic using UserAuthService.
+- [x] Create login.blade.php view with form for email/phone and password.
+- [x] Update create-user.blade.php to call createAccount method on button click.
+- [x] Add routes for /register and /login in web.php.
 
-## Summary
-The map section should now work properly:
-- Users can select any point on the map
-- Latitude and longitude are automatically updated when the marker is moved
-- Default location is set to existing coordinates if available, otherwise Dhaka, Bangladesh
-- Cities dropdown is populated and zones load based on selected city
-- Data is validated and saved to the Partner model
+## Followup Steps
+- [ ] Test user registration with email and phone.
+- [ ] Test user login with email and phone.
+- [ ] Verify validation and error handling.
+- [ ] Check authentication and redirection after login/signup.
